@@ -10,7 +10,12 @@ import {
   TrendingDown,
   Package,
   Filter,
-  MapPin
+  MapPin,
+  BarChart3,
+  Calendar,
+  ShoppingCart,
+  DollarSign,
+  AlertCircle
 } from "lucide-react";
 import vendorImage from "@/assets/vendor-scene.jpg";
 
@@ -55,9 +60,9 @@ const VendorDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Hero Section */}
-      <div className="relative bg-primary text-white">
+      <div className="relative bg-primary text-white overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${vendorImage})` }}
@@ -72,29 +77,72 @@ const VendorDashboard = () => {
           
           {/* Quick Actions */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button variant="secondary" className="flex flex-col p-4 h-auto">
+            <Button variant="secondary" className="flex flex-col p-4 h-auto hover-scale glass">
               <Search className="h-6 w-6 mb-2" />
               <span className="text-sm">Find Suppliers</span>
             </Button>
-            <Button variant="secondary" className="flex flex-col p-4 h-auto">
+            <Button variant="secondary" className="flex flex-col p-4 h-auto hover-scale glass">
               <MessageCircle className="h-6 w-6 mb-2" />
               <span className="text-sm">Messages</span>
+              <Badge variant="destructive" className="mt-1 text-xs">3</Badge>
             </Button>
-            <Button variant="secondary" className="flex flex-col p-4 h-auto">
+            <Button variant="secondary" className="flex flex-col p-4 h-auto hover-scale glass">
               <Truck className="h-6 w-6 mb-2" />
               <span className="text-sm">Track Orders</span>
+              <Badge variant="default" className="mt-1 text-xs">2 Active</Badge>
             </Button>
-            <Button variant="secondary" className="flex flex-col p-4 h-auto">
+            <Button variant="secondary" className="flex flex-col p-4 h-auto hover-scale glass">
               <Bell className="h-6 w-6 mb-2" />
               <span className="text-sm">Alerts</span>
+              <Badge variant="secondary" className="mt-1 text-xs">5 New</Badge>
             </Button>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Dashboard Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <DollarSign className="h-8 w-8 text-green-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">₹2,450</p>
+                <p className="text-sm text-muted-foreground">Today's Savings</p>
+              </div>
+            </div>
+          </Card>
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <ShoppingCart className="h-8 w-8 text-blue-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">12</p>
+                <p className="text-sm text-muted-foreground">Active Orders</p>
+              </div>
+            </div>
+          </Card>
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <BarChart3 className="h-8 w-8 text-purple-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">89%</p>
+                <p className="text-sm text-muted-foreground">Stock Level</p>
+              </div>
+            </div>
+          </Card>
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <Calendar className="h-8 w-8 text-orange-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">3</p>
+                <p className="text-sm text-muted-foreground">Due Today</p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
         {/* Smart Recommendations */}
-        <Card className="mb-8 p-6 bg-gradient-card backdrop-blur-sm border-0 shadow-card">
+        <Card className="mb-8 p-6 glass glass-dark border-0 shadow-card animate-fade-in">
           <h2 className="text-xl font-semibold mb-4 flex items-center">
             <TrendingDown className="mr-2 h-5 w-5 text-primary" />
             Smart Recommendations

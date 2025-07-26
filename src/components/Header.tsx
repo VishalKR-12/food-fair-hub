@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Users, Store } from "lucide-react";
+import { Menu, X, Users, Store, Moon, Sun } from "lucide-react";
 
 interface HeaderProps {
   onNavigate: (view: 'home' | 'vendor' | 'supplier') => void;
@@ -9,9 +10,10 @@ interface HeaderProps {
 
 const Header = ({ onNavigate, currentView }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
-    <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <header className="glass glass-dark sticky top-0 z-50 border-b border-border/50 backdrop-blur-xl">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -19,10 +21,10 @@ const Header = ({ onNavigate, currentView }: HeaderProps) => {
             className="flex items-center cursor-pointer"
             onClick={() => onNavigate('home')}
           >
-            <div className="bg-gradient-hero p-2 rounded-lg mr-3">
+            <div className="bg-gradient-hero p-2 rounded-lg mr-3 animate-float">
               <Store className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Food Fair Hub</span>
+            <span className="text-xl font-bold text-foreground">Food Fair Hub</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -30,13 +32,14 @@ const Header = ({ onNavigate, currentView }: HeaderProps) => {
             <Button
               variant={currentView === 'home' ? 'default' : 'ghost'}
               onClick={() => onNavigate('home')}
+              className="hover-scale"
             >
               Home
             </Button>
             <Button
               variant={currentView === 'vendor' ? 'vendor' : 'ghost'}
               onClick={() => onNavigate('vendor')}
-              className="flex items-center"
+              className="flex items-center hover-scale"
             >
               <Users className="mr-2 h-4 w-4" />
               For Vendors
@@ -44,10 +47,22 @@ const Header = ({ onNavigate, currentView }: HeaderProps) => {
             <Button
               variant={currentView === 'supplier' ? 'supplier' : 'ghost'}
               onClick={() => onNavigate('supplier')}
-              className="flex items-center"
+              className="flex items-center hover-scale"
             >
               <Store className="mr-2 h-4 w-4" />
               For Suppliers
+            </Button>
+            
+            {/* Theme Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="hover-scale"
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
             </Button>
           </nav>
 
@@ -65,7 +80,7 @@ const Header = ({ onNavigate, currentView }: HeaderProps) => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="md:hidden py-4 border-t border-border/50 glass">
             <div className="flex flex-col space-y-2">
               <Button
                 variant={currentView === 'home' ? 'default' : 'ghost'}
@@ -98,6 +113,24 @@ const Header = ({ onNavigate, currentView }: HeaderProps) => {
               >
                 <Store className="mr-2 h-4 w-4" />
                 For Suppliers
+              </Button>
+              
+              <Button
+                variant="ghost"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="w-full justify-start"
+              >
+                {theme === "dark" ? (
+                  <>
+                    <Sun className="mr-2 h-4 w-4" />
+                    Light Mode
+                  </>
+                ) : (
+                  <>
+                    <Moon className="mr-2 h-4 w-4" />
+                    Dark Mode
+                  </>
+                )}
               </Button>
             </div>
           </div>

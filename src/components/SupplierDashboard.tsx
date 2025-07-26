@@ -10,7 +10,11 @@ import {
   Package,
   Users,
   Clock,
-  Star
+  Star,
+  BarChart3,
+  DollarSign,
+  ShoppingCart,
+  AlertTriangle
 } from "lucide-react";
 import supplierImage from "@/assets/supplier-warehouse.jpg";
 
@@ -75,9 +79,9 @@ const SupplierDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Hero Section */}
-      <div className="relative bg-secondary text-white">
+      <div className="relative bg-secondary text-white overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${supplierImage})` }}
@@ -92,19 +96,19 @@ const SupplierDashboard = () => {
           
           {/* Today's Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+            <div className="glass glass-dark rounded-lg p-4 border border-white/20 hover-scale">
               <div className="text-2xl font-bold">{todayStats.totalOrders}</div>
               <div className="text-sm text-secondary-foreground/80">Orders Today</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+            <div className="glass glass-dark rounded-lg p-4 border border-white/20 hover-scale">
               <div className="text-2xl font-bold">{todayStats.revenue}</div>
               <div className="text-sm text-secondary-foreground/80">Revenue</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+            <div className="glass glass-dark rounded-lg p-4 border border-white/20 hover-scale">
               <div className="text-2xl font-bold">{todayStats.newVendors}</div>
               <div className="text-sm text-secondary-foreground/80">New Vendors</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+            <div className="glass glass-dark rounded-lg p-4 border border-white/20 hover-scale">
               <div className="text-2xl font-bold flex items-center">
                 {todayStats.avgRating}
                 <Star className="h-4 w-4 ml-1 text-yellow-400" />
@@ -116,17 +120,56 @@ const SupplierDashboard = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Performance Dashboard */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <BarChart3 className="h-8 w-8 text-blue-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">₹45,230</p>
+                <p className="text-sm text-muted-foreground">This Week</p>
+              </div>
+            </div>
+          </Card>
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <ShoppingCart className="h-8 w-8 text-green-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">156</p>
+                <p className="text-sm text-muted-foreground">Total Orders</p>
+              </div>
+            </div>
+          </Card>
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <Users className="h-8 w-8 text-purple-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">89</p>
+                <p className="text-sm text-muted-foreground">Active Vendors</p>
+              </div>
+            </div>
+          </Card>
+          <Card className="p-4 glass glass-dark border-0 shadow-card hover-scale">
+            <div className="flex items-center">
+              <AlertTriangle className="h-8 w-8 text-orange-500 mr-3" />
+              <div>
+                <p className="text-2xl font-bold">4</p>
+                <p className="text-sm text-muted-foreground">Low Stock</p>
+              </div>
+            </div>
+          </Card>
+        </div>
         {/* Quick Actions */}
         <div className="mb-8 flex flex-wrap gap-4">
-          <Button variant="supplier" className="flex items-center">
+          <Button variant="supplier" className="flex items-center hover-scale">
             <Plus className="mr-2 h-4 w-4" />
             Add Product
           </Button>
-          <Button variant="outline" className="flex items-center">
+          <Button variant="outline" className="flex items-center hover-scale">
             <MessageCircle className="mr-2 h-4 w-4" />
             Messages
           </Button>
-          <Button variant="outline" className="flex items-center">
+          <Button variant="outline" className="flex items-center hover-scale">
             <TrendingUp className="mr-2 h-4 w-4" />
             Analytics
           </Button>
@@ -135,7 +178,7 @@ const SupplierDashboard = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Product Listings */}
           <div className="lg:col-span-2">
-            <Card className="p-6 shadow-card">
+            <Card className="p-6 glass glass-dark border-0 shadow-card">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">Product Listings</h2>
                 <Button variant="supplier" size="sm">
