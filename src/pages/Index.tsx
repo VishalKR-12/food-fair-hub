@@ -1,12 +1,31 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import VendorDashboard from "@/components/VendorDashboard";
+import SupplierDashboard from "@/components/SupplierDashboard";
 
 const Index = () => {
+  const [currentView, setCurrentView] = useState<'home' | 'vendor' | 'supplier'>('home');
+
+  const handleNavigate = (view: 'home' | 'vendor' | 'supplier') => {
+    setCurrentView(view);
+  };
+
+  const renderContent = () => {
+    switch (currentView) {
+      case 'vendor':
+        return <VendorDashboard />;
+      case 'supplier':
+        return <SupplierDashboard />;
+      default:
+        return <Hero onNavigate={handleNavigate} />;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header onNavigate={handleNavigate} currentView={currentView} />
+      {renderContent()}
     </div>
   );
 };
